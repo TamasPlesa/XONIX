@@ -1,5 +1,7 @@
 const initGameBoard = require('./initGameBoard');
+const initPositionOfCharacters = require('./initPositionsOfCharacters');
 const matrix = initGameBoard.gameBoardGenerator(26, 63, 2);
+const arrayOfMonsters = initPositionOfCharacters.spawnInnerBalls();
 
 const monsterMovement = (arrayOfMonsters, matrix) => {
   for (let i = 0; i < arrayOfMonsters.length; i++) {
