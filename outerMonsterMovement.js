@@ -18,3 +18,7 @@ const outerMonsterMovement = (outerMonster, gameBoard) => {
 
   return gameBoard;
 };
+module.exports = {
+  outerMonsterMovement: outerMonsterMovement
+}
+;
