@@ -7,7 +7,7 @@ const outerMonsterMovement = (outerMonster, gameBoard) => {
 
   outerMonster.x += Number(outerMonster.xd);
   outerMonster.y += Number(outerMonster.yd);
-  gameBoard[outerMonster.x][outerMonster.y] = ' ';
+  gameBoard[outerMonster.x][outerMonster.y] = '2';
   gameBoard[temp.x][temp.y] = 0;
   if (outerMonster.x === gameBoard.length - 1 || outerMonster.x === 0 || gameBoard[outerMonster.x - 1][outerMonster.y] === 1 || gameBoard[outerMonster.x + 1][outerMonster.y] === 1) {
     outerMonster.xd *= -1;
@@ -18,3 +18,7 @@ const outerMonsterMovement = (outerMonster, gameBoard) => {
 
   return gameBoard;
 };
+module.exports = {
+  outerMonsterMovement: outerMonsterMovement
+}
+;
