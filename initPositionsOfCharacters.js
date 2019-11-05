@@ -9,13 +9,12 @@ const spawnPlayer = (gameBoard) => {
 ;
 
 const spawnOuterBall = (gameBoard) => {
-  const minusOrPlusX = Math.floor(Math.random() * 2) === 1 ? 1 : -1;
   const minusOrPlusY = Math.floor(Math.random() * 2) === 1 ? 1 : -1;
   const outerBallObject = {
     mark: 3,
     xPosition: gameBoard.length - 1,
     yPosition: Math.floor(gameBoard[0].length / 2),
-    xDirection: 1 * minusOrPlusX,
+    xDirection: 1,
     yDirection: 1 * minusOrPlusY
   };
   return outerBallObject;
