@@ -1,19 +1,18 @@
-
 const outerMonsterMovement = (outerMonster, gameBoard) => {
   const temp = {
-    x: outerMonster.x,
-    y: outerMonster.y
+    x: outerMonster.xPosition,
+    y: outerMonster.yPosition
   };
 
-  outerMonster.x += Number(outerMonster.xd);
-  outerMonster.y += Number(outerMonster.yd);
-  gameBoard[outerMonster.x][outerMonster.y] = '2';
+  outerMonster.xPosition += Number(outerMonster.xDirection);
+  outerMonster.yPosition += Number(outerMonster.yDirection);
+  gameBoard[outerMonster.xPosition][outerMonster.yPosition] = 4;
   gameBoard[temp.x][temp.y] = 0;
-  if (outerMonster.x === gameBoard.length - 1 || outerMonster.x === 0 || gameBoard[outerMonster.x - 1][outerMonster.y] === 1 || gameBoard[outerMonster.x + 1][outerMonster.y] === 1) {
-    outerMonster.xd *= -1;
+  if (outerMonster.xPosition === gameBoard.length - 1 || outerMonster.xPosition === 0 || gameBoard[outerMonster.xPosition - 1][outerMonster.yPosition] === 1 || gameBoard[outerMonster.xPosition + 1][outerMonster.yPosition] === 1) {
+    outerMonster.xDirection *= -1;
   }
-  if (outerMonster.y === gameBoard[outerMonster.x].length - 1 || outerMonster.y === 0 || gameBoard[outerMonster.x][outerMonster.y - 1] === 1 || gameBoard[outerMonster.x][outerMonster.y + 1] === 1) {
-    outerMonster.yd *= -1;
+  if (outerMonster.yPosition === gameBoard[outerMonster.xPosition].length - 1 || outerMonster.yPosition === 0 || gameBoard[outerMonster.xPosition][outerMonster.yPosition - 1] === 1 || gameBoard[outerMonster.xPosition][outerMonster.yPosition + 1] === 1) {
+    outerMonster.yDirection *= -1;
   }
 
   return gameBoard;
