@@ -12,8 +12,8 @@ const monsterMovement = (arrayOfMonsters, matrix) => {
     if (matrix[monster.xPosition - 1][monster.yPosition] === 0 || matrix[monster.xPosition + 1][monster.yPosition] === 0) {
       monster.xDirection *= -1;
     }
-    if (matrix[monster.xPosition][monster.yPosition - 1] === 0 || matrix[monster.xPosition][monster.yPosition + 1] === 0) {
-      monster.yDirection *= -1;
+    if (matrix[monster.x][monster.y - 1] === 0 || matrix[monster.x][monster.y + 1] === 0) {
+      monster.yd *= -1;
     }
   }
   return matrix;
