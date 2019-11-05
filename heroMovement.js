@@ -1,8 +1,6 @@
-const lastPressedKey = '';
-
 let sum = 0;
-
 let temporaryField = 0;
+
 const moveDown = (playerObject, gameBoard) => {
   const nextXPosition = playerObject.xPosition + 1;
   if (gameBoard[nextXPosition][playerObject.yPosition] === 5) process.exit();
@@ -97,7 +95,7 @@ const findTheFirstSpace = (gameBoard) => {
   }
 };
 
-const checkingSidesDown = (gameBoard, firstSpaceToCut) => {
+const checkingSidesDown = (gameBoard, lastPressedKey, firstSpaceToCut) => {
   const helperArray = [];
   for (let i = 0; i < gameBoard.length; i++) {
     helperArray[i] = [...gameBoard[i]];
@@ -111,6 +109,7 @@ const checkingSidesDown = (gameBoard, firstSpaceToCut) => {
     firstSide = counterOfOnes(helperArray, lastPressedKey, [i - 1, j - 1]);
     sum = 0;
     secondSide = counterOfOnes(helperArray, lastPressedKey, [i + 1, j + 1]);
+    sum = 0;
     if (firstSide <= secondSide) {
       firstOneToCut[0] = i - 1;
       firstOneToCut[1] = j - 1;
@@ -124,6 +123,7 @@ const checkingSidesDown = (gameBoard, firstSpaceToCut) => {
     firstSide = counterOfOnes(helperArray, lastPressedKey, [i, j - 1]);
     sum = 0;
     secondSide = counterOfOnes(helperArray, lastPressedKey, [i, j + 1]);
+    sum = 0;
     if (firstSide <= secondSide) {
       firstOneToCut[0] = i;
       firstOneToCut[1] = j - 1;
@@ -137,6 +137,7 @@ const checkingSidesDown = (gameBoard, firstSpaceToCut) => {
     firstSide = counterOfOnes(helperArray, lastPressedKey, [i - 1, j]);
     sum = 0;
     secondSide = counterOfOnes(helperArray, lastPressedKey, [i + 1, j]);
+    sum = 0;
     if (firstSide <= secondSide) {
       firstOneToCut[0] = i - 1;
       firstOneToCut[1] = j;
@@ -148,7 +149,6 @@ const checkingSidesDown = (gameBoard, firstSpaceToCut) => {
     }
   } else if (gameBoard[i - 1][j + 1] === 1 && gameBoard[i + 1][j - 1] === 1) {
     firstSide = counterOfOnes(helperArray, lastPressedKey, [i - 1, j - 1]);
-    sum = 0;
     secondSide = counterOfOnes(helperArray, lastPressedKey, [i + 1, j + 1]);
     if (firstSide <= secondSide) {
       firstOneToCut[0] = i - 1;

@@ -10,14 +10,12 @@ const arrayOfMonsters = initPositionsOfCharacters.spawnInnerBalls(gameBoard, sta
 const outerMonster = initPositionsOfCharacters.spawnOuterBall(gameBoard);
 let player = initPositionsOfCharacters.spawnPlayer(gameBoard);
 let lastPressedKey = '';
-let temporaryField = 0;
 
 const index = () => {
   gameBoard = monsterMovement.monsterMovement(arrayOfMonsters, gameBoard);
   gameBoard = outerMonsterMovement.outerMonsterMovement(outerMonster, gameBoard);
   console.clear();
   console.log(gameBoard.join('\n'));
-  console.log(heroMovement.temporaryField);
 }
 ;
 
@@ -30,56 +28,53 @@ process.stdin.on('data', (key) => {
     if (player.xPosition !== 25) player = heroMovement.moveDown(player, gameBoard);
     lastPressedKey = 's';
     const firstSpaceToCut = heroMovement.findTheFirstSpace(gameBoard);
-    temporaryField = heroMovement.temporaryFieldAdder();
+    const temporaryField = heroMovement.temporaryFieldAdder();
     if (temporaryField === 0 && firstSpaceToCut != null) {
-      const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, firstSpaceToCut);
+      const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, lastPressedKey, firstSpaceToCut);
       heroMovement.cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
       if (firstOneToCut != null) heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut);
       console.clear();
       console.log(gameBoard.join('\n'));
-      console.log('first: ', firstOneToCut);
     }
   }
   if (key === 'w') {
     if (player.xPosition !== 0) player = heroMovement.moveUp(player, gameBoard);
     lastPressedKey = 'w';
     const firstSpaceToCut = heroMovement.findTheFirstSpace(gameBoard);
-    temporaryField = heroMovement.temporaryFieldAdder();
+    const temporaryField = heroMovement.temporaryFieldAdder();
     if (temporaryField === 0 && firstSpaceToCut != null) {
-      const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, firstSpaceToCut);
+      const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, lastPressedKey, firstSpaceToCut);
       heroMovement.cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
       if (firstOneToCut != null) heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut);
       console.clear();
       console.log(gameBoard.join('\n'));
-      console.log('first: ', firstOneToCut);
     }
   }
   if (key === 'd') {
     if (player.yPosition !== 62) player = heroMovement.moveRight(player, gameBoard);
     lastPressedKey = 'd';
     const firstSpaceToCut = heroMovement.findTheFirstSpace(gameBoard);
-    temporaryField = heroMovement.temporaryFieldAdder();
+    const temporaryField = heroMovement.temporaryFieldAdder();
     if (temporaryField === 0 && firstSpaceToCut != null) {
-      const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, firstSpaceToCut);
+      const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, lastPressedKey, firstSpaceToCut);
       heroMovement.cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
       if (firstOneToCut != null) { heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut); }
       console.clear();
       console.log(gameBoard.join('\n'));
-      console.log('first: ', firstOneToCut);
     }
   }
   if (key === 'a') {
     if (player.yPosition !== 0) player = heroMovement.moveLeft(player, gameBoard);
     lastPressedKey = 'a';
     const firstSpaceToCut = heroMovement.findTheFirstSpace(gameBoard);
-    temporaryField = heroMovement.temporaryFieldAdder();
+    const temporaryField = heroMovement.temporaryFieldAdder();
     if (temporaryField === 0 && firstSpaceToCut != null) {
-      const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, firstSpaceToCut);
+      const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, lastPressedKey, firstSpaceToCut);
       heroMovement.cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
+      console.log(firstOneToCut);
       if (firstOneToCut != null) { heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut); }
       console.clear();
       console.log(gameBoard.join('\n'));
-      console.log('first: ', firstOneToCut);
     }
   }
   if (key === 'q') {
