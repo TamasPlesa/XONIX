@@ -5,6 +5,7 @@ require('node-strings');
 const menu = require('yat-menu');
 const center = require('align-text');
 const fs = require('fs');
+const index = require('./index');
 
 const stdin = process.stdin;
 stdin.setRawMode(true);
@@ -89,12 +90,7 @@ stdin.on('data', (key) => {
           // START GOMB
 
           if (item === center(chalk.yellow('START GAME'), 65)) {
-            // IDE JON A MAIN FUGGVENY MAJD
-            //
-            //
-            //
-            // --------------------------------
-            console.log('AZ ÉLETED EGY JÁTÉK BASZOD');
+            index.index();
           }
 
           // HIGHSCORES GOMB
