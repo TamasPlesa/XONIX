@@ -1,24 +1,25 @@
-const initGameBoard = require('./initGameBoard');
-const initPositionOfCharacters = require('./initPositionsOfCharacters');
-const matrix = initGameBoard.gameBoardGenerator(26, 63, 2);
-const arrayOfMonsters = initPositionOfCharacters.spawnInnerBalls();
-
 const monsterMovement = (arrayOfMonsters, matrix) => {
   for (let i = 0; i < arrayOfMonsters.length; i++) {
     const monster = arrayOfMonsters[i];
     const temp = {
-      x: monster.x,
-      y: monster.y
+      x: monster.xPosition,
+      y: monster.yPosition
     };
-    monster.x += Number(monster.xd);
-    monster.y += Number(monster.yd);
-    matrix[monster.x][monster.y] = ' ';
+    monster.xPosition += Number(monster.xDirection);
+    monster.yPosition += Number(monster.yDirection);
+    matrix[monster.xPosition][monster.yPosition] = 3;
     matrix[temp.x][temp.y] = 1;
-    if (matrix[monster.x - 1][monster.y] === 0 || matrix[monster.x + 1][monster.y] === 0) {
-      monster.xd *= -1;
+    if (matrix[monster.xPosition - 1][monster.yPosition] === 0 || matrix[monster.xPosition + 1][monster.yPosition] === 0) {
+      monster.xDirection *= -1;
     }
-    if (matrix[monster.x][monster.y - 1] === 0 || matrix[monster.x][monster.y + 1] === 0) {
-      monster.yd *= -1;
+    if (matrix[monster.xPosition][monster.yPosition - 1] === 0 || matrix[monster.xPosition][monster.yPosition + 1] === 0) {
+      monster.yDirection *= -1;
     }
   }
+  return matrix;
 };
+
+module.exports = {
+  monsterMovement: monsterMovement
+}
+;
