@@ -1,65 +1,6 @@
-let lastPressedKey = '';
+const lastPressedKey = '';
 
 let sum = 0;
-
-const stdin = process.stdin;
-stdin.setRawMode(true);
-stdin.resume();
-stdin.setEncoding('utf8');
-process.stdin.on('data', (key) => {
-  if (key === 's') {
-    if (player.xPosition !== 25) player = moveDown(player, gameBoard);
-    lastPressedKey = 's';
-    const firstSpaceToCut = findTheFirstSpace(gameBoard);
-    if (temporaryField === 0 && firstSpaceToCut != null) {
-      const firstOneToCut = checkingSidesDown(gameBoard, firstSpaceToCut);
-      cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
-      if (firstOneToCut != null) cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut);
-      console.clear();
-      console.log(gameBoard.join('\n'));
-    }
-  }
-  if (key === 'w') {
-    if (player.xPosition !== 0) player = moveUp(player, gameBoard);
-    lastPressedKey = 'w';
-    const firstSpaceToCut = findTheFirstSpace(gameBoard);
-    if (temporaryField === 0 && firstSpaceToCut != null) {
-      const firstOneToCut = checkingSidesDown(gameBoard, firstSpaceToCut);
-      cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
-      if (firstOneToCut != null) cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut);
-      console.clear();
-      console.log(gameBoard.join('\n'));
-    }
-  }
-  if (key === 'd') {
-    if (player.yPosition !== 62) player = moveRight(player, gameBoard);
-    lastPressedKey = 'd';
-    const firstSpaceToCut = findTheFirstSpace(gameBoard);
-    if (temporaryField === 0 && firstSpaceToCut != null) {
-      const firstOneToCut = checkingSidesDown(gameBoard, firstSpaceToCut);
-      cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
-      if (firstOneToCut != null) { cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut); }
-      console.clear();
-      console.log(gameBoard.join('\n'));
-    }
-  }
-  if (key === 'a') {
-    if (player.yPosition !== 0) player = moveLeft(player, gameBoard);
-    lastPressedKey = 'a';
-    const firstSpaceToCut = findTheFirstSpace(gameBoard);
-    if (temporaryField === 0 && firstSpaceToCut != null) {
-      const firstOneToCut = checkingSidesDown(gameBoard, firstSpaceToCut);
-      cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
-      console.log(firstOneToCut);
-      if (firstOneToCut != null) { cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut); }
-      console.clear();
-      console.log(gameBoard.join('\n'));
-    }
-  }
-  if (key === 'q') {
-    process.exit();
-  }
-});
 
 let temporaryField = 0;
 const moveDown = (playerObject, gameBoard) => {
@@ -312,6 +253,7 @@ module.exports = {
   checkingSidesDown: checkingSidesDown,
   counterOfOnes: counterOfOnes,
   cuttingOutSpaces: cuttingOutSpaces,
-  cuttingOutOnes: cuttingOutOnes
+  cuttingOutOnes: cuttingOutOnes,
+  temporaryField: temporaryField
 }
 ;
