@@ -6,6 +6,7 @@ const outerMonsterMovement = (outerMonster, gameBoard) => {
   };
 
   outerMonster.xPosition += Number(outerMonster.xDirection);
+
   outerMonster.yPosition += Number(outerMonster.yDirection);
   gameBoard[outerMonster.xPosition][outerMonster.yPosition] = '2';
   gameBoard[temp.x][temp.y] = 0;
