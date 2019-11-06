@@ -1,8 +1,6 @@
-const lastPressedKey = '';
-
 let sum = 0;
-
 let temporaryField = 0;
+
 const moveDown = (playerObject, gameBoard) => {
   const nextXPosition = playerObject.xPosition + 1;
   if (gameBoard[nextXPosition][playerObject.yPosition] === 5) process.exit();
@@ -97,7 +95,7 @@ const findTheFirstSpace = (gameBoard) => {
   }
 };
 
-const checkingSidesDown = (gameBoard, firstSpaceToCut) => {
+const checkingSidesDown = (gameBoard, lastPressedKey, firstSpaceToCut) => {
   const helperArray = [];
   for (let i = 0; i < gameBoard.length; i++) {
     helperArray[i] = [...gameBoard[i]];
@@ -244,6 +242,10 @@ const cuttingOutOnes = (gameBoard, lastPressedKey, firstElementToCutOut) => {
   }
 };
 
+const temporaryFieldAdder = () => {
+  return temporaryField;
+};
+
 module.exports = {
   moveUp: moveUp,
   moveDown: moveDown,
@@ -254,6 +256,6 @@ module.exports = {
   counterOfOnes: counterOfOnes,
   cuttingOutSpaces: cuttingOutSpaces,
   cuttingOutOnes: cuttingOutOnes,
-  temporaryField: temporaryField
+  temporaryFieldAdder: temporaryFieldAdder
 }
 ;

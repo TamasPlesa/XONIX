@@ -16,7 +16,6 @@ const index = () => {
   gameBoard = outerMonsterMovement.outerMonsterMovement(outerMonster, gameBoard);
   console.clear();
   console.log(gameBoard.join('\n'));
-  console.log(heroMovement.temporaryField);
 }
 ;
 
@@ -29,8 +28,9 @@ process.stdin.on('data', (key) => {
     if (player.xPosition !== 25) player = heroMovement.moveDown(player, gameBoard);
     lastPressedKey = 's';
     const firstSpaceToCut = heroMovement.findTheFirstSpace(gameBoard);
-    if (heroMovement.temporaryField === 0 && firstSpaceToCut != null) {
-      const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, firstSpaceToCut);
+    const temporaryField = heroMovement.temporaryFieldAdder();
+    if (temporaryField === 0 && firstSpaceToCut != null) {
+      const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, lastPressedKey, firstSpaceToCut);
       heroMovement.cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
       if (firstOneToCut != null) heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut);
       console.clear();
@@ -41,8 +41,9 @@ process.stdin.on('data', (key) => {
     if (player.xPosition !== 0) player = heroMovement.moveUp(player, gameBoard);
     lastPressedKey = 'w';
     const firstSpaceToCut = heroMovement.findTheFirstSpace(gameBoard);
-    if (heroMovement.temporaryField === 0 && firstSpaceToCut != null) {
-      const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, firstSpaceToCut);
+    const temporaryField = heroMovement.temporaryFieldAdder();
+    if (temporaryField === 0 && firstSpaceToCut != null) {
+      const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, lastPressedKey, firstSpaceToCut);
       heroMovement.cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
       if (firstOneToCut != null) heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut);
       console.clear();
@@ -53,8 +54,9 @@ process.stdin.on('data', (key) => {
     if (player.yPosition !== 62) player = heroMovement.moveRight(player, gameBoard);
     lastPressedKey = 'd';
     const firstSpaceToCut = heroMovement.findTheFirstSpace(gameBoard);
-    if (heroMovement.temporaryField === 0 && firstSpaceToCut != null) {
-      const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, firstSpaceToCut);
+    const temporaryField = heroMovement.temporaryFieldAdder();
+    if (temporaryField === 0 && firstSpaceToCut != null) {
+      const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, lastPressedKey, firstSpaceToCut);
       heroMovement.cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
       if (firstOneToCut != null) { heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut); }
       console.clear();
@@ -65,8 +67,9 @@ process.stdin.on('data', (key) => {
     if (player.yPosition !== 0) player = heroMovement.moveLeft(player, gameBoard);
     lastPressedKey = 'a';
     const firstSpaceToCut = heroMovement.findTheFirstSpace(gameBoard);
-    if (heroMovement.temporaryField === 0 && firstSpaceToCut != null) {
-      const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, firstSpaceToCut);
+    const temporaryField = heroMovement.temporaryFieldAdder();
+    if (temporaryField === 0 && firstSpaceToCut != null) {
+      const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, lastPressedKey, firstSpaceToCut);
       heroMovement.cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
       console.log(firstOneToCut);
       if (firstOneToCut != null) { heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut); }
