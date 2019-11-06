@@ -5,7 +5,7 @@ require('node-strings');
 const menu = require('yat-menu');
 const center = require('align-text');
 const fs = require('fs');
-const index = require('./index');
+const startGame = require('./start-game');
 
 const stdin = process.stdin;
 stdin.setRawMode(true);
@@ -90,7 +90,7 @@ stdin.on('data', (key) => {
           // START GOMB
 
           if (item === center(chalk.yellow('START GAME'), 65)) {
-            index.index();
+
           }
 
           // HIGHSCORES GOMB

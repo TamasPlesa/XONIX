@@ -8,7 +8,7 @@ const collision = require('./collision');
 
 let actualLife = collision.lifeExport();
 
-const stagelevel = 1;
+const stagelevel = 10;
 let gameBoard = initGameBoard.gameBoardGenerator(26, 63, 2);
 const arrayOfMonsters = initPositionsOfCharacters.spawnInnerBalls(gameBoard, stagelevel);
 const outerMonster = initPositionsOfCharacters.spawnOuterBall(gameBoard);
@@ -138,7 +138,7 @@ process.stdin.on('data', (key) => {
 let moveUpInterval = 0;
 let moveRightInterval = 0;
 let moveLeftInterval = 0; */
-setInterval(index, 400);
+setInterval(index, 200);
 
 /* module.exports = {
   startGame: startGame

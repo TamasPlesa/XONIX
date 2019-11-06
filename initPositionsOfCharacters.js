@@ -26,8 +26,8 @@ const spawnInnerBalls = (gameBoard, stageLevel) => {
   for (let i = 0; i < stageLevel + 2; i++) {
     const minusOrPlusX = Math.floor(Math.random() * 2) === 1 ? 1 : -1;
     const minusOrPlusY = Math.floor(Math.random() * 2) === 1 ? 1 : -1;
-    const xPositioner = Math.floor(Math.random() * (gameBoard.length - 4) + 2);
-    const yPositioner = Math.floor(Math.random() * (gameBoard[0].length - 4) + 2);
+    const xPositioner = Math.floor(Math.random() * (gameBoard.length - 4) + 3);
+    const yPositioner = Math.floor(Math.random() * (gameBoard[0].length - 4) + 3);
     const obj = {
       mark: 4,
       xPosition: xPositioner,
