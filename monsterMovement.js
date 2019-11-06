@@ -7,7 +7,7 @@ const monsterMovement = (arrayOfMonsters, matrix) => {
     };
     monster.xPosition += Number(monster.xDirection);
     monster.yPosition += Number(monster.yDirection);
-    matrix[monster.xPosition][monster.yPosition] = ' ';
+    matrix[monster.xPosition][monster.yPosition] = 3;
     matrix[temp.x][temp.y] = 1;
     if (matrix[monster.xPosition - 1][monster.yPosition] === 0 || matrix[monster.xPosition + 1][monster.yPosition] === 0) {
       monster.xDirection *= -1;
