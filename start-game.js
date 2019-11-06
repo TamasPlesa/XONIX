@@ -94,6 +94,7 @@ const index = () => {
   gameBoard = monsterMovement.monsterMovement(arrayOfMonsters, gameBoard);
   gameBoard = outerMonsterMovement.outerMonsterMovement(outerMonster, gameBoard);
   if (lastPressedKey === '') gameBoard[1][31] = 2;
+  console.clear();
   draw.draw(gameBoard);
   console.log(actualLife);
   collision.collision(arrayOfMonsters, outerMonster, gameBoard);
