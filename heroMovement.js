@@ -17,8 +17,6 @@ const moveDown = (playerObject, gameBoard) => {
     xPosition: nextXPosition,
     yPosition: playerObject.yPosition
   };
-  console.clear();
-  console.log(gameBoard.join('\n'));
   return playersActualPosition;
 };
 
@@ -38,8 +36,6 @@ const moveUp = (playerObject, gameBoard) => {
     xPosition: nextXPosition,
     yPosition: playerObject.yPosition
   };
-  console.clear();
-  console.log(gameBoard.join('\n'));
   return playersActualPosition;
 };
 
@@ -60,8 +56,6 @@ const moveRight = (playerObject, gameBoard) => {
     yPosition: nextYPosition
 
   };
-  console.clear();
-  console.log(gameBoard.join('\n'));
   return playersActualPosition;
 };
 
@@ -82,8 +76,6 @@ const moveLeft = (playerObject, gameBoard) => {
     yPosition: nextYPosition
 
   };
-  console.clear();
-  console.log(gameBoard.join('\n'));
   return playersActualPosition;
 };
 
@@ -105,7 +97,7 @@ const checkingSidesDown = (gameBoard, lastPressedKey, firstSpaceToCut) => {
   const firstOneToCut = [];
   let firstSide;
   let secondSide;
-  if (gameBoard[i - 1][j - 1] === 1 && gameBoard[i + 1][j + 1] === 1) {
+  if (helperArray[i - 1][j - 1] === 1 && helperArray[i + 1][j + 1] === 1) {
     firstSide = counterOfOnes(helperArray, lastPressedKey, [i - 1, j - 1]);
     sum = 0;
     secondSide = counterOfOnes(helperArray, lastPressedKey, [i + 1, j + 1]);
@@ -119,7 +111,7 @@ const checkingSidesDown = (gameBoard, lastPressedKey, firstSpaceToCut) => {
       firstOneToCut[1] = j + 1;
       return firstOneToCut;
     }
-  } else if (gameBoard[i][j - 1] === 1 && gameBoard[i][j + 1] === 1) {
+  } else if (helperArray[i][j - 1] === 1 && helperArray[i][j + 1] === 1) {
     firstSide = counterOfOnes(helperArray, lastPressedKey, [i, j - 1]);
     sum = 0;
     secondSide = counterOfOnes(helperArray, lastPressedKey, [i, j + 1]);
@@ -133,7 +125,7 @@ const checkingSidesDown = (gameBoard, lastPressedKey, firstSpaceToCut) => {
       firstOneToCut[1] = j + 1;
       return firstOneToCut;
     }
-  } else if (gameBoard[i - 1][j] === 1 && gameBoard[i + 1][j] === 1) {
+  } else if (helperArray[i - 1][j] === 1 && helperArray[i + 1][j] === 1) {
     firstSide = counterOfOnes(helperArray, lastPressedKey, [i - 1, j]);
     sum = 0;
     secondSide = counterOfOnes(helperArray, lastPressedKey, [i + 1, j]);
@@ -147,7 +139,7 @@ const checkingSidesDown = (gameBoard, lastPressedKey, firstSpaceToCut) => {
       firstOneToCut[1] = j;
       return firstOneToCut;
     }
-  } else if (gameBoard[i - 1][j + 1] === 1 && gameBoard[i + 1][j - 1] === 1) {
+  } else if (helperArray[i - 1][j + 1] === 1 && helperArray[i + 1][j - 1] === 1) {
     firstSide = counterOfOnes(helperArray, lastPressedKey, [i - 1, j - 1]);
     secondSide = counterOfOnes(helperArray, lastPressedKey, [i + 1, j + 1]);
     if (firstSide <= secondSide) {
@@ -246,6 +238,10 @@ const temporaryFieldAdder = () => {
   return temporaryField;
 };
 
+const setTemporaryField = () => {
+  temporaryField = 0;
+};
+
 module.exports = {
   moveUp: moveUp,
   moveDown: moveDown,
@@ -256,6 +252,7 @@ module.exports = {
   counterOfOnes: counterOfOnes,
   cuttingOutSpaces: cuttingOutSpaces,
   cuttingOutOnes: cuttingOutOnes,
-  temporaryFieldAdder: temporaryFieldAdder
+  temporaryFieldAdder: temporaryFieldAdder,
+  setTemporaryField: setTemporaryField
 }
 ;
