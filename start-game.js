@@ -3,6 +3,7 @@ const initPositionsOfCharacters = require('./initPositionsOfCharacters');
 const monsterMovement = require('./monsterMovement');
 const outerMonsterMovement = require('./outerMonsterMovement');
 const heroMovement = require('./heroMovement');
+const draw = require('./colorboard');
 
 const stagelevel = 1;
 let gameBoard = initGameBoard.gameBoardGenerator(26, 63, 2);
@@ -15,7 +16,7 @@ const index = () => {
   gameBoard = monsterMovement.monsterMovement(arrayOfMonsters, gameBoard);
   gameBoard = outerMonsterMovement.outerMonsterMovement(outerMonster, gameBoard);
   console.clear();
-  console.log(gameBoard.join('\n'));
+  draw.draw(gameBoard);
 }
 ;
 
@@ -33,8 +34,6 @@ process.stdin.on('data', (key) => {
       const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, lastPressedKey, firstSpaceToCut);
       heroMovement.cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
       if (firstOneToCut != null) heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut);
-      console.clear();
-      console.log(gameBoard.join('\n'));
     }
   }
   if (key === 'w') {
@@ -46,8 +45,6 @@ process.stdin.on('data', (key) => {
       const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, lastPressedKey, firstSpaceToCut);
       heroMovement.cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
       if (firstOneToCut != null) heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut);
-      console.clear();
-      console.log(gameBoard.join('\n'));
     }
   }
   if (key === 'd') {
@@ -59,8 +56,6 @@ process.stdin.on('data', (key) => {
       const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, lastPressedKey, firstSpaceToCut);
       heroMovement.cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
       if (firstOneToCut != null) { heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut); }
-      console.clear();
-      console.log(gameBoard.join('\n'));
     }
   }
   if (key === 'a') {
@@ -73,8 +68,6 @@ process.stdin.on('data', (key) => {
       heroMovement.cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
       console.log(firstOneToCut);
       if (firstOneToCut != null) { heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut); }
-      console.clear();
-      console.log(gameBoard.join('\n'));
     }
   }
   if (key === 'q') {
@@ -82,4 +75,4 @@ process.stdin.on('data', (key) => {
   }
 });
 
-setInterval(index, 500);
+setInterval(index, 60);

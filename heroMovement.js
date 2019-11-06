@@ -17,8 +17,6 @@ const moveDown = (playerObject, gameBoard) => {
     xPosition: nextXPosition,
     yPosition: playerObject.yPosition
   };
-  console.clear();
-  console.log(gameBoard.join('\n'));
   return playersActualPosition;
 };
 
@@ -38,8 +36,7 @@ const moveUp = (playerObject, gameBoard) => {
     xPosition: nextXPosition,
     yPosition: playerObject.yPosition
   };
-  console.clear();
-  console.log(gameBoard.join('\n'));
+
   return playersActualPosition;
 };
 
@@ -60,8 +57,7 @@ const moveRight = (playerObject, gameBoard) => {
     yPosition: nextYPosition
 
   };
-  console.clear();
-  console.log(gameBoard.join('\n'));
+
   return playersActualPosition;
 };
 
@@ -82,8 +78,7 @@ const moveLeft = (playerObject, gameBoard) => {
     yPosition: nextYPosition
 
   };
-  console.clear();
-  console.log(gameBoard.join('\n'));
+
   return playersActualPosition;
 };
 
