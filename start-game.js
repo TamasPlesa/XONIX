@@ -8,7 +8,7 @@ const collision = require('./collision');
 
 let actualLife = collision.lifeExport();
 
-const stagelevel = 10;
+const stagelevel = 5;
 let gameBoard = initGameBoard.gameBoardGenerator(26, 63, 2);
 const arrayOfMonsters = initPositionsOfCharacters.spawnInnerBalls(gameBoard, stagelevel);
 const outerMonster = initPositionsOfCharacters.spawnOuterBall(gameBoard);

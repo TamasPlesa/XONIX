@@ -5,7 +5,7 @@ const index = () => {
   const outerMonsterMovement = require('./outerMonsterMovement');
   const heroMovement = require('./heroMovement');
 
-  const stagelevel = 1;
+  const stagelevel = 5;
   let gameBoard = initGameBoard.gameBoardGenerator(26, 63, 2);
   const arrayOfMonsters = initPositionsOfCharacters.spawnInnerBalls(gameBoard, stagelevel);
   const outerMonster = initPositionsOfCharacters.spawnOuterBall(gameBoard);
