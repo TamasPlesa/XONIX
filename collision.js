@@ -1,11 +1,15 @@
 
+const gameOver = require('./game-over');
+const startGame = require('./start-game');
 let life = 3;
 
-const collision = (arrayOfMonsters, outerMonster, gameBoard) => {
-/*   const nextPosOfOuterMonster = gameBoard[outerMonster.xPosition + outerMonster.xDirection][outerMonster.yPosition + outerMonster.yDirection];
+const collision = (arrayOfMonsters, temporaryDirection, outerMonster, gameBoard) => {
+  const tempXDirection = temporaryDirection[0];
+  const tempYDirection = temporaryDirection[1];
+  const nextPosOfOuterMonster = gameBoard[outerMonster.xPosition + tempXDirection][outerMonster.yPosition + tempYDirection];
   if (nextPosOfOuterMonster === 2 || nextPosOfOuterMonster === 5) {
     life--;
-  } */
+  }
   for (let i = 0; i < arrayOfMonsters.length; i++) {
     const monster = arrayOfMonsters[i];
     const nextPosition = gameBoard[monster.xPosition + monster.xDirection][monster.yPosition + monster.yDirection];
@@ -13,7 +17,9 @@ const collision = (arrayOfMonsters, outerMonster, gameBoard) => {
       life--;
     }
     if (life === 0) {
-      process.exit();
+      console.clear();
+      gameOver.gameOver();
+      startGame.startGame();
     }
   }
 
@@ -24,8 +30,13 @@ const lifeExport = () => {
   return life;
 };
 
+const lifeminuser = (a) => {
+  life = life - a;
+};
+
 module.exports = {
   collision: collision,
-  lifeExport: lifeExport
+  lifeExport: lifeExport,
+  lifeminuser: lifeminuser
 }
 ;

@@ -9,8 +9,11 @@ const startGame = () => {
   const font = require('unifont');
   const center = require('align-text');
   const chalk = require('chalk');
+  const score = require('./score');
+  const percent = require('./percent');
 
-  let actualLife = collision.lifeExport();
+  let actualLife = 3;
+  let actualScore = 0;
 
   const stagelevel = 5;
   let gameBoard = initGameBoard.gameBoardGenerator(26, 63, 2);
@@ -18,6 +21,7 @@ const startGame = () => {
   const outerMonster = initPositionsOfCharacters.spawnOuterBall(gameBoard);
   let player = initPositionsOfCharacters.spawnPlayer(gameBoard);
   let lastPressedKey = '';
+  const maxOfField = percent.maxOfFieldFunc(gameBoard);
 
   const moveDownInterval = () => {
     clearInterval(moveRightInterval);
@@ -30,7 +34,8 @@ const startGame = () => {
     if (temporaryField === 0 && firstSpaceToCut != null) {
       const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, lastPressedKey, firstSpaceToCut);
       heroMovement.cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
-      if (firstOneToCut != null) heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut);
+      if (firstOneToCut != null && firstOneToCut !== -1) heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut);
+      actualScore += score.countScore(gameBoard);
     }
   };
   const moveUpInterval = () => {
@@ -44,7 +49,8 @@ const startGame = () => {
     if (temporaryField === 0 && firstSpaceToCut != null) {
       const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, lastPressedKey, firstSpaceToCut);
       heroMovement.cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
-      if (firstOneToCut != null) heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut);
+      if (firstOneToCut != null && firstOneToCut !== -1) heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut);
+      actualScore += score.countScore(gameBoard);
     }
   };
 
@@ -59,7 +65,8 @@ const startGame = () => {
     if (temporaryField === 0 && firstSpaceToCut != null) {
       const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, lastPressedKey, firstSpaceToCut);
       heroMovement.cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
-      if (firstOneToCut != null) { heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut); }
+      if (firstOneToCut != null && firstOneToCut !== -1) { heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut); }
+      actualScore += score.countScore(gameBoard);
     }
   };
 
@@ -74,7 +81,8 @@ const startGame = () => {
     if (temporaryField === 0 && firstSpaceToCut != null) {
       const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, lastPressedKey, firstSpaceToCut);
       heroMovement.cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
-      if (firstOneToCut != null) { heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut); }
+      if (firstOneToCut != null && firstOneToCut !== -1) { heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut); }
+      actualScore += score.countScore(gameBoard);
     }
   };
 
@@ -97,9 +105,23 @@ const startGame = () => {
   const index = () => {
     gameBoard = monsterMovement.monsterMovement(arrayOfMonsters, gameBoard);
     gameBoard = outerMonsterMovement.outerMonsterMovement(outerMonster, gameBoard);
+    const temporaryDirection = outerMonsterMovement.directionExport();
     // if (lastPressedKey === '') gameBoard[1][31] = 2;
     console.clear();
     draw.draw(gameBoard);
+    console.log(actualScore);
+    console.log(actualLife);
+    collision.collision(arrayOfMonsters, temporaryDirection, outerMonster, gameBoard);
+    const life = collision.lifeExport();
+    if (actualLife > life) {
+      putHeroBack();
+      actualLife--;
+      lastPressedKey = '';
+    }
+    const actualPercent = percent.actualPercentFunc(gameBoard);
+    const isItLess = percent.lessThanTwentyFive(maxOfField, actualPercent);
+    console.log(Math.ceil(actualPercent / maxOfField * 100, '%'));
+    console.log('is it less? ', isItLess);
 
     // LIFE TEMPLATE
     const option = {
@@ -107,14 +129,6 @@ const startGame = () => {
     };
     const text = font('\n  Life    ' + actualLife.toString(), option);
     console.log(center(chalk.yellow(text), 65));
-
-    collision.collision(arrayOfMonsters, outerMonster, gameBoard);
-    const life = collision.lifeExport();
-    if (actualLife > life) {
-      putHeroBack();
-      actualLife--;
-      lastPressedKey = '';
-    }
 
     if (lastPressedKey === 's') { moveDownInterval(); }
     if (lastPressedKey === 'w') { moveUpInterval(); }
@@ -151,6 +165,7 @@ let moveRightInterval = 0;
 let moveLeftInterval = 0; */
   setInterval(index, 60);
 };
+startGame();
 module.exports = {
   startGame: startGame
 };

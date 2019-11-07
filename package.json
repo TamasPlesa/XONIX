@@ -1,0 +1,22 @@
+{
+  "name": "eta-xonix",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flowacademyhu/eta-xonix.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/flowacademyhu/eta-xonix/issues"
+  },
+  "homepage": "https://github.com/flowacademyhu/eta-xonix#readme",
+  "dependencies": {
+    "colors": "^1.4.0"
+  }
+}
