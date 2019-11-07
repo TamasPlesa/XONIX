@@ -23,7 +23,7 @@ const actualPercentFunc = (gameBoard) => {
 };
 
 const lessThanTwentyFive = (gameBoard, MaxOfField, actualPercent) => {
-  if (MaxOfField * 0.25 <= actualPercent) {
+  if (MaxOfField * 0.25 >= actualPercent) {
     return true;
   }
 };
