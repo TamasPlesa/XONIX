@@ -27,3 +27,10 @@ const lessThanTwentyFive = (gameBoard, MaxOfField, actualPercent) => {
     return true;
   }
 };
+
+module.exports = {
+  maxOfFieldFunc: maxOfFieldFunc,
+  actualPercentFunc: actualPercentFunc,
+  lessThanTwentyFive: lessThanTwentyFive
+}
+;
