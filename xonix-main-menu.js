@@ -4,8 +4,11 @@ const typeWrite = require('node-typewriter');
 require('node-strings');
 const menu = require('yat-menu');
 const center = require('align-text');
-const fs = require('fs');
 const startGame = require('./start-game');
+const mpg = require('mpg123');
+var player = new mpg.MpgPlayer();
+
+player.play('Retro_Game_Music_Compilation[grabfrom.com].mp3');
 
 const stdin = process.stdin;
 stdin.setRawMode(true);
@@ -38,19 +41,24 @@ figlet.text('       press  space', {
   }
   setTimeout(function () {
     console.log(chalk.red(data).blink());
-  }, 5000);
+  }, 4000);
 
   // PRESS SPACE TO CONTINUE
 });
 stdin.on('data', (key) => {
+  const menuSound = () => {
+    const mpg = require('mpg123');
+    player = new mpg.MpgPlayer();
+    player.play('sfx_menu_select1 (online-audio-converter.com).mp3');
+  };
   if (key === ' ') {
+    menuSound();
     console.clear();
 
     // MENU FUGGVENY ( START GAME, HIGHSCORES, EXIT BUTTON )
 
     const menuMain = () => {
       menu([center(chalk.yellow('START GAME'), 65),
-        center(chalk.yellow('HIGHSCORES'), 65),
         center(chalk.yellow(' EXIT'), 67)], {
         header: figlet.text('     m a i n   m e n u', {
           font: 'DOS Rebel',
@@ -81,7 +89,7 @@ stdin.on('data', (key) => {
             });
 
             // EXIT GOMB ESETEN 10 MASODPERC MULVA KILEP A PROGRAMBOL
-
+            menuSound();
             setTimeout(() => {
               process.exit();
             }, 10000);
@@ -90,42 +98,13 @@ stdin.on('data', (key) => {
           // START GOMB
 
           if (item === center(chalk.yellow('START GAME'), 65)) {
+            menuSound();
             startGame.startGame();
           }
 
           // HIGHSCORES GOMB
-
-          if (item === center(chalk.yellow('HIGHSCORES'), 65)) {
-            fs.readFile('/home/plesa/users.txt', function (err, data) {
-              if (err) {
-                console.error(err);
-              }
-
-              // 1 mp-t vár, hogy a highscores kiíródjon, majd kihúzza sorban a highscorest.
-
-              setTimeout(() => {
-                typeWrite(chalk.yellow(center(data.toString(), 68)));
-              }, 1000);
-
-              // HIGHSCORES FELIRAT
-
-              figlet.text('     h i g h s c o r e s', {
-                font: 'DOS Rebel',
-                horizontalLayout: 'default',
-                verticalLayout: 'default'
-              }, function (err, data) {
-                if (err) {
-                  console.error(err);
-                }
-
-                console.log(chalk.yellow(data).blink());
-              });
-              setTimeout(function () {
-                menuMain();
-              }, 10000);
-            });
-          }
-        });
+        }
+        );
     };
     menuMain();
   }
