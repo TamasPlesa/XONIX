@@ -1,6 +1,6 @@
+const mpg = require('mpg123');
+const player = new mpg.MpgPlayer();
 
-const gameOver = require('./game-over');
-const startGame = require('./start-game');
 let life = 3;
 
 const collision = (arrayOfMonsters, temporaryDirection, outerMonster, gameBoard) => {
@@ -9,17 +9,17 @@ const collision = (arrayOfMonsters, temporaryDirection, outerMonster, gameBoard)
   const nextPosOfOuterMonster = gameBoard[outerMonster.xPosition + tempXDirection][outerMonster.yPosition + tempYDirection];
   if (nextPosOfOuterMonster === 2 || nextPosOfOuterMonster === 5) {
     life--;
+    player.play('sfx_lowhealth_alarmloop7 (online-audio-converter.com).mp3');
   }
   for (let i = 0; i < arrayOfMonsters.length; i++) {
     const monster = arrayOfMonsters[i];
     const nextPosition = gameBoard[monster.xPosition + monster.xDirection][monster.yPosition + monster.yDirection];
     if (nextPosition === 2 || nextPosition === 5) {
       life--;
+      player.play('sfx_lowhealth_alarmloop7 (online-audio-converter.com).mp3');
     }
     if (life === 0) {
-      console.clear();
-      gameOver.gameOver();
-      startGame.startGame();
+
     }
   }
 
