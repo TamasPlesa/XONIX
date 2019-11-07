@@ -1,7 +1,7 @@
 let temporaryXDirection = 0;
 let temporaryYDirection = 0;
 const outerMonsterMovement = (outerMonster, gameBoard) => {
-  if (outerMonster.xPosition === gameBoard.length - 1 || outerMonster.xPosition === 0 || gameBoard[outerMonster.xPosition - 1][outerMonster.yPosition] === 1 || gameBoard[outerMonster.xPosition + 1][outerMonster.yPosition] === 1) {
+  if (outerMonster.xPosition === gameBoard.length - 1 || outerMonster.xPosition === 0 || gameBoard[outerMonster.xPosition - 1][outerMonster.yPosition] === 1 || gameBoard[outerMonster.xPosition + 1][outerMonster.yPosition] === 1 || gameBoard[outerMonster.xPosition - 1][outerMonster.yPosition] === 3 || gameBoard[outerMonster.xPosition + 1][outerMonster.yPosition] === 3) {
     outerMonster.xDirection *= -1;
   }
   if (outerMonster.yPosition === gameBoard[outerMonster.xPosition].length - 1 || outerMonster.yPosition === 0 || gameBoard[outerMonster.xPosition][outerMonster.yPosition - 1] === 1 || gameBoard[outerMonster.xPosition][outerMonster.yPosition + 1] === 1) {
