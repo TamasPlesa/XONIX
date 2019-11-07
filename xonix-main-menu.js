@@ -90,7 +90,7 @@ stdin.on('data', (key) => {
           // START GOMB
 
           if (item === center(chalk.yellow('START GAME'), 65)) {
-
+            startGame.startGame();
           }
 
           // HIGHSCORES GOMB
