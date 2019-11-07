@@ -25,7 +25,7 @@ const actualPercentFunc = (gameBoard) => {
 const lessThanTwentyFive = (MaxOfField, actualPercent) => {
   if (MaxOfField * 0.25 >= actualPercent) {
     return true;
-  }
+  } else return false;
 };
 
 module.exports = {

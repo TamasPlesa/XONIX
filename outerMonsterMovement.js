@@ -20,7 +20,7 @@ const outerMonsterMovement = (outerMonster, gameBoard) => {
     temporaryXDirection = outerMonster.xDirection * -1;
   }
   if (outerMonster.yPosition === gameBoard[outerMonster.xPosition].length - 1 || outerMonster.yPosition === 0 || gameBoard[outerMonster.xPosition][outerMonster.yPosition - 1] === 1 || gameBoard[outerMonster.xPosition][outerMonster.yPosition + 1] === 1) {
-    temporaryYDirection = outerMonster.yDirection * -1;
+    temporaryYDirection = outerMonster.yDirection * 1;
   }
   return gameBoard;
 };

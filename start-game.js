@@ -6,16 +6,18 @@ const heroMovement = require('./heroMovement');
 const draw = require('./colorboard');
 const collision = require('./collision');
 const score = require('./score');
+const percent = require('./percent');
 
 let actualLife = collision.lifeExport();
 let actualScore = 0;
 
-const stagelevel = 3;
+const stagelevel = 1;
 let gameBoard = initGameBoard.gameBoardGenerator(26, 63, 2);
 const arrayOfMonsters = initPositionsOfCharacters.spawnInnerBalls(gameBoard, stagelevel);
 const outerMonster = initPositionsOfCharacters.spawnOuterBall(gameBoard);
 let player = initPositionsOfCharacters.spawnPlayer(gameBoard);
 let lastPressedKey = '';
+const maxOfField = percent.maxOfFieldFunc(gameBoard);
 
 const moveDownInterval = () => {
   clearInterval(moveRightInterval);
@@ -112,6 +114,10 @@ const index = () => {
     actualLife--;
     lastPressedKey = '';
   }
+  const actualPercent = percent.actualPercentFunc(gameBoard);
+  const isItLess = percent.lessThanTwentyFive(maxOfField, actualPercent);
+  console.log(Math.ceil(actualPercent / maxOfField * 100, '%'));
+  console.log('is it less? ', isItLess);
 
   if (lastPressedKey === 's') { moveDownInterval(); }
   if (lastPressedKey === 'w') { moveUpInterval(); }
@@ -142,4 +148,4 @@ process.stdin.on('data', (key) => {
   }
 });
 
-setInterval(index, 50);
+setInterval(index, 100);
