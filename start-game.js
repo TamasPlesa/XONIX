@@ -12,7 +12,7 @@ const startGame = () => {
   let actualLife = collision.lifeExport();
   let actualScore = 0;
 
-  const stagelevel = 1;
+  const stagelevel = 2;
   let gameBoard = initGameBoard.gameBoardGenerator(26, 63, 2);
   const arrayOfMonsters = initPositionsOfCharacters.spawnInnerBalls(gameBoard, stagelevel);
   const outerMonster = initPositionsOfCharacters.spawnOuterBall(gameBoard);
@@ -101,6 +101,7 @@ const startGame = () => {
 
   const index = () => {
     gameBoard = monsterMovement.monsterMovement(arrayOfMonsters, gameBoard);
+    console.log('arrayofmonsters: ', arrayOfMonsters);
     gameBoard = outerMonsterMovement.outerMonsterMovement(outerMonster, gameBoard);
     const temporaryDirection = outerMonsterMovement.directionExport();
     // if (lastPressedKey === '') gameBoard[1][31] = 2;

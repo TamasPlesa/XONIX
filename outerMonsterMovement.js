@@ -4,7 +4,7 @@ const outerMonsterMovement = (outerMonster, gameBoard) => {
   if (outerMonster.xPosition === gameBoard.length - 1 || outerMonster.xPosition === 0 || gameBoard[outerMonster.xPosition - 1][outerMonster.yPosition] === 1 || gameBoard[outerMonster.xPosition + 1][outerMonster.yPosition] === 1 || gameBoard[outerMonster.xPosition - 1][outerMonster.yPosition] === 3 || gameBoard[outerMonster.xPosition + 1][outerMonster.yPosition] === 3) {
     outerMonster.xDirection *= -1;
   }
-  if (outerMonster.yPosition === gameBoard[outerMonster.xPosition].length - 1 || outerMonster.yPosition === 0 || gameBoard[outerMonster.xPosition][outerMonster.yPosition - 1] === 1 || gameBoard[outerMonster.xPosition][outerMonster.yPosition + 1] === 1) {
+  if (outerMonster.yPosition === gameBoard[outerMonster.xPosition].length - 1 || outerMonster.yPosition === 0 || gameBoard[outerMonster.xPosition][outerMonster.yPosition - 1] === 1 || gameBoard[outerMonster.xPosition][outerMonster.yPosition + 1] === 1 || gameBoard[outerMonster.xPosition][outerMonster.yPosition - 1] === 3 || gameBoard[outerMonster.xPosition][outerMonster.yPosition + 1] === 3) {
     outerMonster.yDirection *= -1;
   }
   const temp = {
@@ -19,7 +19,7 @@ const outerMonsterMovement = (outerMonster, gameBoard) => {
   if (outerMonster.xPosition === gameBoard.length - 1 || outerMonster.xPosition === 0 || gameBoard[outerMonster.xPosition - 1][outerMonster.yPosition] === 1 || gameBoard[outerMonster.xPosition + 1][outerMonster.yPosition] === 1) {
     temporaryXDirection = outerMonster.xDirection * -1;
   }
-  if (outerMonster.yPosition === gameBoard[outerMonster.xPosition].length - 1 || outerMonster.yPosition === 0 || gameBoard[outerMonster.xPosition][outerMonster.yPosition - 1] === 1 || gameBoard[outerMonster.xPosition][outerMonster.yPosition + 1] === 1) {
+  if (outerMonster.yPosition === gameBoard[outerMonster.xPosition].length - 1 || outerMonster.yPosition === 0 || gameBoard[outerMonster.xPosition][outerMonster.yPosition - 1] === 1 || gameBoard[outerMonster.xPosition][outerMonster.yPosition + 1] === 1 || gameBoard[outerMonster.xPosition][outerMonster.yPosition - 1] === 3 || gameBoard[outerMonster.xPosition][outerMonster.yPosition + 1] === 3) {
     temporaryYDirection = outerMonster.yDirection * 1;
   }
   return gameBoard;
