@@ -212,7 +212,7 @@ const cuttingOutOnes = (gameBoard, lastPressedKey, firstElementToCutOut) => {
   const i = firstElementToCutOut[0];
   const j = firstElementToCutOut[1];
   if (lastPressedKey === 's' || lastPressedKey === 'd' || lastPressedKey === 'a' || lastPressedKey === 'w') {
-    if (gameBoard[i][j] === 1) {
+    if (gameBoard[i][j] === 1 || gameBoard[i][j] === 3) {
       gameBoard[i][j] = 0;
       firstElementToCutOut[0] = i;
       firstElementToCutOut[1] = j - 1;
@@ -220,12 +220,12 @@ const cuttingOutOnes = (gameBoard, lastPressedKey, firstElementToCutOut) => {
       firstElementToCutOut[0] = i;
       firstElementToCutOut[1] = j + 1;
       cuttingOutOnes(gameBoard, lastPressedKey, firstElementToCutOut);
-      if (gameBoard[i - 1][j] === 1) {
+      if (gameBoard[i - 1][j] === 1 || gameBoard[i - 1][j] === 3) {
         firstElementToCutOut[0] = i - 1;
         firstElementToCutOut[1] = j;
         cuttingOutOnes(gameBoard, lastPressedKey, firstElementToCutOut);
       }
-      if (gameBoard[i + 1][j] === 1) {
+      if (gameBoard[i + 1][j] === 1 || gameBoard[i - 1][j] === 3) {
         firstElementToCutOut[0] = i + 1;
         firstElementToCutOut[1] = j;
         cuttingOutOnes(gameBoard, lastPressedKey, firstElementToCutOut);
