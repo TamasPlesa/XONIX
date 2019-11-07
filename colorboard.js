@@ -2,7 +2,7 @@ const colors = require('colors');
 
 const draw = (gameBoard) => {
   for (let i = 0; i < gameBoard.length; i++) {
-    let line = '';
+    let line = '         ';
     for (let j = 0; j < gameBoard[i].length; j++) {
       if (gameBoard[i][j] === 0) {
         line = line + '  '.bgYellow;
