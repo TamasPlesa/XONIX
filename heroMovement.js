@@ -3,14 +3,14 @@ let temporaryField = 0;
 
 const moveDown = (playerObject, gameBoard) => {
   const nextXPosition = playerObject.xPosition + 1;
-  if (gameBoard[nextXPosition][playerObject.yPosition] === 5) process.exit();
+  if (gameBoard[nextXPosition][playerObject.yPosition] === 5);
   if (playerObject.xPosition === 0) {
     gameBoard[nextXPosition][playerObject.yPosition] = 2;
     gameBoard[playerObject.xPosition][playerObject.yPosition] = 0;
   } else {
     gameBoard[playerObject.xPosition][playerObject.yPosition] = temporaryField;
     temporaryField = gameBoard[nextXPosition][playerObject.yPosition];
-    if (temporaryField === 1) temporaryField = 5;
+    if (temporaryField === 1 || temporaryField === 3) temporaryField = 5;
     gameBoard[nextXPosition][playerObject.yPosition] = 2;
   }
   const playersActualPosition = {
@@ -29,7 +29,7 @@ const moveUp = (playerObject, gameBoard) => {
   } else {
     gameBoard[playerObject.xPosition][playerObject.yPosition] = temporaryField;
     temporaryField = gameBoard[nextXPosition][playerObject.yPosition];
-    if (temporaryField === 1) temporaryField = 5;
+    if (temporaryField === 1 || temporaryField === 3) temporaryField = 5;
     gameBoard[nextXPosition][playerObject.yPosition] = 2;
   }
   const playersActualPosition = {
@@ -48,7 +48,7 @@ const moveRight = (playerObject, gameBoard) => {
   } else {
     gameBoard[playerObject.xPosition][playerObject.yPosition] = temporaryField;
     temporaryField = gameBoard[playerObject.xPosition][nextYPosition];
-    if (temporaryField === 1) temporaryField = 5;
+    if (temporaryField === 1 || temporaryField === 3) temporaryField = 5;
     gameBoard[playerObject.xPosition][nextYPosition] = 2;
   }
   const playersActualPosition = {
@@ -68,7 +68,7 @@ const moveLeft = (playerObject, gameBoard) => {
   } else {
     gameBoard[playerObject.xPosition][playerObject.yPosition] = temporaryField;
     temporaryField = gameBoard[playerObject.xPosition][nextYPosition];
-    if (temporaryField === 1) temporaryField = 5;
+    if (temporaryField === 1 || temporaryField === 3) temporaryField = 5;
     gameBoard[playerObject.xPosition][nextYPosition] = 2;
   }
   const playersActualPosition = {
@@ -151,7 +151,7 @@ const checkingSidesDown = (gameBoard, lastPressedKey, firstSpaceToCut) => {
       firstOneToCut[1] = j - 1;
       return firstOneToCut;
     }
-  }
+  } else return -1;
 };
 
 const counterOfOnes = (helperArray, lastPressedKey, firstElementToCutOut) => {
@@ -212,7 +212,7 @@ const cuttingOutOnes = (gameBoard, lastPressedKey, firstElementToCutOut) => {
   const i = firstElementToCutOut[0];
   const j = firstElementToCutOut[1];
   if (lastPressedKey === 's' || lastPressedKey === 'd' || lastPressedKey === 'a' || lastPressedKey === 'w') {
-    if (gameBoard[i][j] === 1) {
+    if (gameBoard[i][j] === 1 || gameBoard[i][j] === 3) {
       gameBoard[i][j] = 0;
       firstElementToCutOut[0] = i;
       firstElementToCutOut[1] = j - 1;
@@ -220,12 +220,12 @@ const cuttingOutOnes = (gameBoard, lastPressedKey, firstElementToCutOut) => {
       firstElementToCutOut[0] = i;
       firstElementToCutOut[1] = j + 1;
       cuttingOutOnes(gameBoard, lastPressedKey, firstElementToCutOut);
-      if (gameBoard[i - 1][j] === 1) {
+      if (gameBoard[i - 1][j] === 1 || gameBoard[i - 1][j] === 3) {
         firstElementToCutOut[0] = i - 1;
         firstElementToCutOut[1] = j;
         cuttingOutOnes(gameBoard, lastPressedKey, firstElementToCutOut);
       }
-      if (gameBoard[i + 1][j] === 1) {
+      if (gameBoard[i + 1][j] === 1 || gameBoard[i - 1][j] === 3) {
         firstElementToCutOut[0] = i + 1;
         firstElementToCutOut[1] = j;
         cuttingOutOnes(gameBoard, lastPressedKey, firstElementToCutOut);

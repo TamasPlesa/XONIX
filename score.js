@@ -3,7 +3,7 @@ const countScore = (gameBoard) => {
   for (let i = 2; i < gameBoard.length - 3; i++) {
     for (let j = 2; j < gameBoard[i].length - 3; j++) {
       if (gameBoard[i][j] === 0) {
-        score += 5;
+        score += 1;
       }
     }
   }

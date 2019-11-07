@@ -5,15 +5,19 @@ const outerMonsterMovement = require('./outerMonsterMovement');
 const heroMovement = require('./heroMovement');
 const draw = require('./colorboard');
 const collision = require('./collision');
+const score = require('./score');
+const percent = require('./percent');
 
 let actualLife = collision.lifeExport();
+let actualScore = 0;
 
-const stagelevel = 5;
+const stagelevel = 1;
 let gameBoard = initGameBoard.gameBoardGenerator(26, 63, 2);
 const arrayOfMonsters = initPositionsOfCharacters.spawnInnerBalls(gameBoard, stagelevel);
 const outerMonster = initPositionsOfCharacters.spawnOuterBall(gameBoard);
 let player = initPositionsOfCharacters.spawnPlayer(gameBoard);
 let lastPressedKey = '';
+const maxOfField = percent.maxOfFieldFunc(gameBoard);
 
 const moveDownInterval = () => {
   clearInterval(moveRightInterval);
@@ -26,7 +30,8 @@ const moveDownInterval = () => {
   if (temporaryField === 0 && firstSpaceToCut != null) {
     const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, lastPressedKey, firstSpaceToCut);
     heroMovement.cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
-    if (firstOneToCut != null) heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut);
+    if (firstOneToCut != null && firstOneToCut !== -1) heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut);
+    actualScore += score.countScore(gameBoard);
   }
 };
 const moveUpInterval = () => {
@@ -40,7 +45,8 @@ const moveUpInterval = () => {
   if (temporaryField === 0 && firstSpaceToCut != null) {
     const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, lastPressedKey, firstSpaceToCut);
     heroMovement.cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
-    if (firstOneToCut != null) heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut);
+    if (firstOneToCut != null && firstOneToCut !== -1) heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut);
+    actualScore += score.countScore(gameBoard);
   }
 };
 
@@ -55,7 +61,8 @@ const moveRightInterval = () => {
   if (temporaryField === 0 && firstSpaceToCut != null) {
     const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, lastPressedKey, firstSpaceToCut);
     heroMovement.cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
-    if (firstOneToCut != null) { heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut); }
+    if (firstOneToCut != null && firstOneToCut !== -1) { heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut); }
+    actualScore += score.countScore(gameBoard);
   }
 };
 
@@ -70,7 +77,8 @@ const moveLeftInterval = () => {
   if (temporaryField === 0 && firstSpaceToCut != null) {
     const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, lastPressedKey, firstSpaceToCut);
     heroMovement.cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
-    if (firstOneToCut != null) { heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut); }
+    if (firstOneToCut != null && firstOneToCut !== -1) { heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut); }
+    actualScore += score.countScore(gameBoard);
   }
 };
 
@@ -93,17 +101,23 @@ const putHeroBack = () => {
 const index = () => {
   gameBoard = monsterMovement.monsterMovement(arrayOfMonsters, gameBoard);
   gameBoard = outerMonsterMovement.outerMonsterMovement(outerMonster, gameBoard);
-  if (lastPressedKey === '') gameBoard[1][31] = 2;
+  const temporaryDirection = outerMonsterMovement.directionExport();
+  // if (lastPressedKey === '') gameBoard[1][31] = 2;
   console.clear();
   draw.draw(gameBoard);
+  console.log(actualScore);
   console.log(actualLife);
-  collision.collision(arrayOfMonsters, outerMonster, gameBoard);
+  collision.collision(arrayOfMonsters, temporaryDirection, outerMonster, gameBoard);
   const life = collision.lifeExport();
   if (actualLife > life) {
     putHeroBack();
     actualLife--;
     lastPressedKey = '';
   }
+  const actualPercent = percent.actualPercentFunc(gameBoard);
+  const isItLess = percent.lessThanTwentyFive(maxOfField, actualPercent);
+  console.log(Math.ceil(actualPercent / maxOfField * 100, '%'));
+  console.log('is it less? ', isItLess);
 
   if (lastPressedKey === 's') { moveDownInterval(); }
   if (lastPressedKey === 'w') { moveUpInterval(); }
@@ -134,12 +148,4 @@ process.stdin.on('data', (key) => {
   }
 });
 
-/* let moveDownInterval = 0;
-let moveUpInterval = 0;
-let moveRightInterval = 0;
-let moveLeftInterval = 0; */
-setInterval(index, 200);
-
-/* module.exports = {
-  startGame: startGame
-}; */
+setInterval(index, 100);
