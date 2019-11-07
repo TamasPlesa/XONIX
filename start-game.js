@@ -1,4 +1,7 @@
 const startGame = () => {
+  const chalk = require('chalk');
+  const center = require('align-text');
+  const font = require('unifont');
   const initGameBoard = require('./initGameBoard');
   const initPositionsOfCharacters = require('./initPositionsOfCharacters');
   const monsterMovement = require('./monsterMovement');
@@ -8,6 +11,8 @@ const startGame = () => {
   const collision = require('./collision');
   const score = require('./score');
   const percent = require('./percent');
+  const gameOver = require('./game-over');
+  const youWin = require('./you-win');
 
   let actualLife = collision.lifeExport();
   let actualScore = 0;
@@ -107,8 +112,7 @@ const startGame = () => {
     // if (lastPressedKey === '') gameBoard[1][31] = 2;
     console.clear();
     draw.draw(gameBoard);
-    console.log(actualScore);
-    console.log(actualLife);
+    const actualPercent = percent.actualPercentFunc(gameBoard);
     collision.collision(arrayOfMonsters, temporaryDirection, outerMonster, gameBoard);
     const life = collision.lifeExport();
     if (actualLife > life) {
@@ -116,10 +120,25 @@ const startGame = () => {
       actualLife--;
       lastPressedKey = '';
     }
-    const actualPercent = percent.actualPercentFunc(gameBoard);
-    const isItLess = percent.lessThanTwentyFive(maxOfField, actualPercent);
-    console.log(Math.ceil(actualPercent / maxOfField * 100, '%'));
-    console.log('is it less? ', isItLess);
+    const option = {
+      font: 'BubbleFill'
+    };
+    const text = font('\n\n  LIFE    ' + actualLife.toString(), option);
+    console.log(center(chalk.yellow(text), 8));
+
+    const text3 = font('\n\n  SCORE    ' + actualScore.toString(), option);
+    console.log(center(chalk.yellow(text3), 8));
+
+    const text2 = font('\n\n  PERCENT    ' + Math.ceil(actualPercent / maxOfField * 100, '%'), option);
+    console.log(center(chalk.yellow(text2), 8));
+    if (life === 0) {
+      clearInterval(indexInterval);
+      gameOver.gameOver();
+    }
+    if (Math.ceil(actualPercent / maxOfField * 100) <= 25) {
+      youWin.youWin();
+      clearInterval(indexInterval);
+    }
 
     if (lastPressedKey === 's') { moveDownInterval(); }
     if (lastPressedKey === 'w') { moveUpInterval(); }
@@ -150,7 +169,7 @@ const startGame = () => {
     }
   });
 
-  setInterval(index, 100);
+  const indexInterval = setInterval(index, 100);
 };
 module.exports = {
   startGame: startGame
