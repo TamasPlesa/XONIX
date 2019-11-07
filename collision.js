@@ -26,8 +26,13 @@ const lifeExport = () => {
   return life;
 };
 
+const lifeminuser = (a) => {
+  life = life - a;
+};
+
 module.exports = {
   collision: collision,
-  lifeExport: lifeExport
+  lifeExport: lifeExport,
+  lifeminuser: lifeminuser
 }
 ;

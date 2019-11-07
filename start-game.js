@@ -28,7 +28,7 @@ const moveDownInterval = () => {
   if (temporaryField === 0 && firstSpaceToCut != null) {
     const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, lastPressedKey, firstSpaceToCut);
     heroMovement.cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
-    if (firstOneToCut != null) heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut);
+    if (firstOneToCut != null && firstOneToCut !== -1) heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut);
     actualScore += score.countScore(gameBoard);
   }
 };
@@ -43,7 +43,7 @@ const moveUpInterval = () => {
   if (temporaryField === 0 && firstSpaceToCut != null) {
     const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, lastPressedKey, firstSpaceToCut);
     heroMovement.cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
-    if (firstOneToCut != null) heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut);
+    if (firstOneToCut != null && firstOneToCut !== -1) heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut);
     actualScore += score.countScore(gameBoard);
   }
 };
@@ -59,7 +59,7 @@ const moveRightInterval = () => {
   if (temporaryField === 0 && firstSpaceToCut != null) {
     const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, lastPressedKey, firstSpaceToCut);
     heroMovement.cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
-    if (firstOneToCut != null) { heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut); }
+    if (firstOneToCut != null && firstOneToCut !== -1) { heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut); }
     actualScore += score.countScore(gameBoard);
   }
 };
@@ -75,7 +75,7 @@ const moveLeftInterval = () => {
   if (temporaryField === 0 && firstSpaceToCut != null) {
     const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, lastPressedKey, firstSpaceToCut);
     heroMovement.cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
-    if (firstOneToCut != null) { heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut); }
+    if (firstOneToCut != null && firstOneToCut !== -1) { heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut); }
     actualScore += score.countScore(gameBoard);
   }
 };
