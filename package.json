@@ -1,8 +1,7 @@
 {
-  "name": "eta-xonix",
+  "name": "@flowacademy/eta-xonix",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "xonix-main-menu.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,5 +23,6 @@
     "node-strings": "^1.0.2",
     "node-typewriter": "0.0.2",
     "yat-menu": "^1.5.0"
-  }
+  },
+  "description": "ALmost the original xonix game"
 }
