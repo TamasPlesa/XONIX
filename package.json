@@ -1,5 +1,5 @@
 {
-  "name": "@flowacademy/eta-xonix",
+  "name": "@flowacademy/xonix",
   "version": "1.0.0",
   "main": "xonix-main-menu.js",
   "scripts": {
