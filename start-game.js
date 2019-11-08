@@ -151,9 +151,6 @@ const startGame = (stagelevel) => {
     if (life === 0) {
       clearInterval(indexInterval);
       gameOver.gameOver();
-      setTimeout(() => {
-        menuMain.menuMain();
-      }, 3000);
     }
     if (Math.ceil(actualPercent / maxOfField * 100) <= 25) {
       youWin.youWin();
