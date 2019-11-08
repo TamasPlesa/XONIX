@@ -14,7 +14,7 @@ const actualPercentFunc = (gameBoard) => {
   let actualPercent = 0;
   for (let i = 0; i < gameBoard.length; i++) {
     for (let j = 0; j < gameBoard[i].length; j++) {
-      if (gameBoard[i][j] === 1) {
+      if (gameBoard[i][j] === 1 || gameBoard[i][j] === 5) {
         actualPercent += 1;
       }
     }

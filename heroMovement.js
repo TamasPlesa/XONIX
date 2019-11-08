@@ -3,7 +3,7 @@ let temporaryField = 0;
 
 const moveDown = (playerObject, gameBoard) => {
   const nextXPosition = playerObject.xPosition + 1;
-  if (gameBoard[nextXPosition][playerObject.yPosition] === 5);
+  if (gameBoard[nextXPosition][playerObject.yPosition] === 5) process.exit();
   if (playerObject.xPosition === 0) {
     gameBoard[nextXPosition][playerObject.yPosition] = 2;
     gameBoard[playerObject.xPosition][playerObject.yPosition] = 0;

@@ -99,7 +99,7 @@ stdin.on('data', (key) => {
 
           if (item === center(chalk.yellow('START GAME'), 65)) {
             menuSound();
-            startGame.startGame();
+            startGame.startGame(0);
           }
 
           // HIGHSCORES GOMB
@@ -107,10 +107,16 @@ stdin.on('data', (key) => {
         );
     };
     menuMain();
+    module.exports = {
+      menuMain: menuMain
+    };
   }
 });
 stdin.on('data', (key) => {
   if (key === 'q') {
     process.exit();
+  }
+  if (key === 'g') {
+    startGame.startGame(0);
   }
 });

@@ -1,3 +1,5 @@
+const menuMain = require('./xonix-main-menu');
+
 const gameOver = () => {
   console.clear();
   const figlet = require('figlet');

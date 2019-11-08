@@ -4,7 +4,6 @@ const spawnPlayer = (gameBoard) => {
     xPosition: 0,
     yPosition: Math.floor(gameBoard[0].length / 2)
   };
-  console.log(gameBoard.join('\n'));
   return playerObject;
 }
 ;

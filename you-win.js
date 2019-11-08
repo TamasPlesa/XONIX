@@ -1,3 +1,6 @@
+let stagelevel = 0;
+const startGame = require('./start-game');
+
 const youWin = () => {
   console.clear();
   const figlet = require('figlet');
@@ -8,7 +11,7 @@ const youWin = () => {
 
   player.play('sfx_sounds_powerup2.mp3');
 
-  figlet.text('\n          y o u   w i n', {
+  figlet.text('\n      n e x t   l e v e l', {
     font: 'DOS Rebel',
     horizontalLayout: 'default',
     verticalLayout: 'default'
@@ -20,7 +23,8 @@ const youWin = () => {
     console.log(chalk.green(data.blink()));
   });
   setTimeout(function () {
-    process.exit();
+    stagelevel++;
+    startGame.startGame(stagelevel);
   }, 5000);
 };
 module.exports = {

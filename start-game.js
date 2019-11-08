@@ -1,4 +1,5 @@
-const startGame = () => {
+
+const startGame = (stagelevel) => {
   const chalk = require('chalk');
   const center = require('align-text');
   const font = require('unifont');
@@ -13,15 +14,16 @@ const startGame = () => {
   const percent = require('./percent');
   const gameOver = require('./game-over');
   const youWin = require('./you-win');
+  const mpg = require('mpg123');
+  const menuMain = require('./xonix-main-menu');
+  const player = new mpg.MpgPlayer();
 
   let actualLife = collision.lifeExport();
   let actualScore = 0;
-
-  const stagelevel = 1;
   let gameBoard = initGameBoard.gameBoardGenerator(26, 63, 2);
   const arrayOfMonsters = initPositionsOfCharacters.spawnInnerBalls(gameBoard, stagelevel);
   const outerMonster = initPositionsOfCharacters.spawnOuterBall(gameBoard);
-  let player = initPositionsOfCharacters.spawnPlayer(gameBoard);
+  let playerke = initPositionsOfCharacters.spawnPlayer(gameBoard);
   let lastPressedKey = '';
   const maxOfField = percent.maxOfFieldFunc(gameBoard);
 
@@ -29,14 +31,18 @@ const startGame = () => {
     clearInterval(moveRightInterval);
     clearInterval(moveUpInterval);
     clearInterval(moveLeftInterval);
-    if (player.xPosition !== 25) player = heroMovement.moveDown(player, gameBoard);
+    if (playerke.xPosition !== 25) playerke = heroMovement.moveDown(playerke, gameBoard);
     lastPressedKey = 's';
     const firstSpaceToCut = heroMovement.findTheFirstSpace(gameBoard);
     const temporaryField = heroMovement.temporaryFieldAdder();
     if (temporaryField === 0 && firstSpaceToCut != null) {
       const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, lastPressedKey, firstSpaceToCut);
       heroMovement.cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
-      if (firstOneToCut != null && firstOneToCut !== -1) heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut);
+      player.play('sfx_sounds_fanfare3 (online-audio-converter.com).mp3');
+      if (firstOneToCut != null && firstOneToCut !== -1) {
+        heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut);
+        player.play('sfx_sounds_fanfare3 (online-audio-converter.com).mp3');
+      }
       actualScore += score.countScore(gameBoard);
     }
   };
@@ -44,14 +50,18 @@ const startGame = () => {
     clearInterval(moveDownInterval);
     clearInterval(moveRightInterval);
     clearInterval(moveLeftInterval);
-    if (player.xPosition !== 0) player = heroMovement.moveUp(player, gameBoard);
+    if (playerke.xPosition !== 0) playerke = heroMovement.moveUp(playerke, gameBoard);
     lastPressedKey = 'w';
     const firstSpaceToCut = heroMovement.findTheFirstSpace(gameBoard);
     const temporaryField = heroMovement.temporaryFieldAdder();
     if (temporaryField === 0 && firstSpaceToCut != null) {
       const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, lastPressedKey, firstSpaceToCut);
       heroMovement.cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
-      if (firstOneToCut != null && firstOneToCut !== -1) heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut);
+      player.play('sfx_sounds_fanfare3 (online-audio-converter.com).mp3');
+      if (firstOneToCut != null && firstOneToCut !== -1) {
+        heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut);
+        player.play('sfx_sounds_fanfare3 (online-audio-converter.com).mp3');
+      }
       actualScore += score.countScore(gameBoard);
     }
   };
@@ -60,14 +70,18 @@ const startGame = () => {
     clearInterval(moveDownInterval);
     clearInterval(moveUpInterval);
     clearInterval(moveLeftInterval);
-    if (player.yPosition !== 62) player = heroMovement.moveRight(player, gameBoard);
+    if (playerke.yPosition !== 62) playerke = heroMovement.moveRight(playerke, gameBoard);
     lastPressedKey = 'd';
     const firstSpaceToCut = heroMovement.findTheFirstSpace(gameBoard);
     const temporaryField = heroMovement.temporaryFieldAdder();
     if (temporaryField === 0 && firstSpaceToCut != null) {
       const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, lastPressedKey, firstSpaceToCut);
       heroMovement.cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
-      if (firstOneToCut != null && firstOneToCut !== -1) { heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut); }
+      player.play('sfx_sounds_fanfare3 (online-audio-converter.com).mp3');
+      if (firstOneToCut != null && firstOneToCut !== -1) {
+        heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut);
+        player.play('sfx_sounds_fanfare3 (online-audio-converter.com).mp3');
+      }
       actualScore += score.countScore(gameBoard);
     }
   };
@@ -76,20 +90,24 @@ const startGame = () => {
     clearInterval(moveDownInterval);
     clearInterval(moveUpInterval);
     clearInterval(moveRightInterval);
-    if (player.yPosition !== 0) player = heroMovement.moveLeft(player, gameBoard);
+    if (playerke.yPosition !== 0) playerke = heroMovement.moveLeft(playerke, gameBoard);
     lastPressedKey = 'a';
     const firstSpaceToCut = heroMovement.findTheFirstSpace(gameBoard);
     const temporaryField = heroMovement.temporaryFieldAdder();
     if (temporaryField === 0 && firstSpaceToCut != null) {
       const firstOneToCut = heroMovement.checkingSidesDown(gameBoard, lastPressedKey, firstSpaceToCut);
       heroMovement.cuttingOutSpaces(gameBoard, lastPressedKey, firstSpaceToCut);
-      if (firstOneToCut != null && firstOneToCut !== -1) { heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut); }
+      player.play('sfx_sounds_fanfare3 (online-audio-converter.com).mp3');
+      if (firstOneToCut != null && firstOneToCut !== -1) {
+        heroMovement.cuttingOutOnes(gameBoard, lastPressedKey, firstOneToCut);
+        player.play('sfx_sounds_fanfare3 (online-audio-converter.com).mp3');
+      }
       actualScore += score.countScore(gameBoard);
     }
   };
 
   const putHeroBack = () => {
-    player = {
+    playerke = {
       mark: 2,
       xPosition: 0,
       yPosition: Math.floor(gameBoard[0].length / 2)
@@ -120,23 +138,31 @@ const startGame = () => {
       lastPressedKey = '';
     }
     const option = {
-      font: 'BubbleFill'
+      font: 'GaintBold'
     };
-    const text = font('\n\n  LIFE    ' + actualLife.toString(), option);
+    const text = font('\n\n LIFE    ' + chalk.green(actualLife.toString()), option);
     console.log(center(chalk.yellow(text), 8));
 
-    const text3 = font('\n\n  SCORE    ' + actualScore.toString(), option);
+    const text3 = font('\n\n SCORE    ' + actualScore.toString(), option);
     console.log(center(chalk.yellow(text3), 8));
 
-    const text2 = font('\n\n  PERCENT    ' + Math.ceil(actualPercent / maxOfField * 100, '%'), option);
+    const text2 = font('\n\n LEFT OF GAMEBOARD    ' + Math.ceil(actualPercent / maxOfField * 100), option);
     console.log(center(chalk.yellow(text2), 8));
     if (life === 0) {
       clearInterval(indexInterval);
       gameOver.gameOver();
+      setTimeout(() => {
+        menuMain.menuMain();
+      }, 3000);
     }
     if (Math.ceil(actualPercent / maxOfField * 100) <= 25) {
       youWin.youWin();
       clearInterval(indexInterval);
+    }
+    if (arrayOfMonsters.length === 0) {
+      clearInterval(indexInterval);
+      console.clear();
+      youWin.youWin();
     }
 
     if (lastPressedKey === 's') { moveDownInterval(); }
@@ -168,8 +194,9 @@ const startGame = () => {
     }
   });
 
-  const indexInterval = setInterval(index, 100);
+  const indexInterval = setInterval(index, 60);
 };
+
 module.exports = {
   startGame: startGame
 };
